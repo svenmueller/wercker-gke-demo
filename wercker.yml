@@ -22,6 +22,7 @@ build:
         repository: $GCR_TAG
         registry: $GCR_HOST
 
+
 deploy-to-kubernetes:
     box: python:2.7
     steps:
@@ -46,12 +47,13 @@ deploy-to-kubernetes:
     # Kubernetes configuration.
 
     # `apply` is a good command to use here, as it'll create Kubernetes entities if they are missing.
+
     - riceo/kubectl:
         name: deploy to kubernetes
+        debug: true
         server: $KUBERNETES_MASTER
         gcloud-key-json: $GCP_KEY_JSON
         gke-cluster-name: $GKE_CLUSTER_NAME
         gke-cluster-zone: $GKE_CLUSTER_ZONE
         gke-cluster-project: $GKE_CLUSTER_PROJECT
-        debug: true
-        command: --namespace $WERCKER_GIT_BRANCH apply -f $WERCKER_OUTPUT_DIR/kubernetes/
+        command: get namespace $WERCKER_GIT_BRANCH || $kubectl create namespace $WERCKER_GIT_BRANCH; $kubectl --namespace $WERCKER_GIT_BRANCH apply -f $WERCKER_OUTPUT_DIR/kubernetes/
