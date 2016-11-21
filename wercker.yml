@@ -56,4 +56,4 @@ deploy-to-kubernetes:
         gke-cluster-name: $GKE_CLUSTER_NAME
         gke-cluster-zone: $GKE_CLUSTER_ZONE
         gke-cluster-project: $GKE_CLUSTER_PROJECT
-        command: get namespace $WERCKER_GIT_BRANCH || $kubectl create namespace $WERCKER_GIT_BRANCH; $kubectl --namespace $WERCKER_GIT_BRANCH apply -f $WERCKER_OUTPUT_DIR/kubernetes/
+        command: get namespace $WERCKER_GIT_BRANCH || $WERCKER_STEP_ROOT/kubectl create namespace $WERCKER_GIT_BRANCH; $WERCKER_STEP_ROOT/kubectl --namespace $WERCKER_GIT_BRANCH apply -f $WERCKER_OUTPUT_DIR/kubernetes/
