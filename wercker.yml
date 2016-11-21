@@ -53,4 +53,5 @@ deploy-to-kubernetes:
         gke-cluster-name: $GKE_CLUSTER_NAME
         gke-cluster-zone: $GKE_CLUSTER_ZONE
         gke-cluster-project: $GKE_CLUSTER_PROJECT
+        debug: true
         command: --namespace $WERCKER_GIT_BRANCH apply -f $WERCKER_OUTPUT_DIR/kubernetes/
